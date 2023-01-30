@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
 
 		if ((arg.rfind("-H", 0) == 0) || (arg.rfind("--HELP", 0) == 0))
 		{
-			cout << "Usage: ./cvss \"[CVSS string]\"" << endl;
+			cout << "Usage: ./cvss \"[CVSS Vector String]\"" << endl;
 			cout << endl;
 			cout << " -a  Display base, temporal, and environmental score." << endl;
 			cout << " -b  Display base score." << endl;
@@ -765,6 +765,8 @@ int main(int argc, char *argv[]){
 					cout << "Environmental: ";
 				cout << cvss->GetEnvironmentalScore() << endl;
 			}
+
+			delete cvss;
 
 			return EXIT_SUCCESS;
 		}

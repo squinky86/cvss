@@ -1,0 +1,25 @@
+.\" Manpage for cvss.
+.\" https://www.github.com/squinky86/cvss
+.TH man 1 "30 Jan 2023" "0.1" "cvss man page"
+.SH NAME
+cvss \- calculate the CVSS score of a weakness
+.SH SYNOPSIS
+cvss [-a | -b | -t | -e ] "[CVSS Vector String]"
+.SH DESCRIPTION
+Common Vulnerability Scoring System (CVSS) scores (and component scores) are calculated. The calculation is displayed to the user.
+.SH OPTIONS
+.TP
+-a display all (base, temporal, and environmental) score calculations
+(same as "-b -t -e")
+.TP
+-b display base score calculation (default if none specified)
+.TP
+-t display temporal score calculation
+.TP
+-e display environmental score calculation
+.SH SEE ALSO
+No known additional manpages.
+.SH BUGS
+Only CVSS 3.0 and 3.1 are supported at this time.
+.SH AUTHOR
+Jon Hood (jwh0011@auburn.edu)

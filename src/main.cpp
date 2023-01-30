@@ -17,6 +17,8 @@ along with this program; if not, write to the Free Software Foundation,
 Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "cvss.h"
+#include "cvss_3.h"
 #include "cvss_3_1.h"
 #include <algorithm>
 #include <cstdlib>
@@ -68,6 +70,8 @@ int main(int argc, char *argv[]){
 	bool temporalScore = false;
 	bool environmentalScore = false;
 
+	string tmpCvssVersion = "3.1";
+
 	for (int i2 = 1; i2 < argc; i2++)
 	{
 		string arg(argv[i2]);
@@ -115,13 +119,20 @@ int main(int argc, char *argv[]){
 				if (j.rfind("CVSS", 0) == 0) // CVSS Version
 				{
 					string cvssVersion = GetValue(j);
-					if ((cvssVersion.rfind("3.1", 0) == 0) || (cvssVersion.rfind("3.0", 0) == 0))
+					if (cvssVersion.rfind("3.1", 0) == 0)
 					{
-						//supported CVSS version detected
+						tmpCvssVersion = "3.1";
 						continue;
 					}
-					cerr << "Unsupported CVSS version " << cvssVersion << endl;
-					return EXIT_FAILURE;
+					else if (cvssVersion.rfind("3.0", 0) == 0)
+					{
+						tmpCvssVersion = "3.0";
+					}
+					else
+					{
+						cerr << "Unsupported CVSS version " << cvssVersion << endl;
+						return EXIT_FAILURE;
+					}
 				}
 				else if (j.rfind("AV:", 0) == 0) // Attack Vector (AV)
 				{
@@ -715,7 +726,22 @@ int main(int argc, char *argv[]){
 					//return EXIT_FAILURE;
 				}
 			}
-			CVSS_3_1 cvss(av, ac, pr, ui, s, c, i, a, e, rl, rc, cr, ir, ar, mav, mac, mpr, mui, ms, mc, mi, ma);
+
+			CVSS *cvss;
+			if (tmpCvssVersion.compare("3.0") == 0)
+			{
+				cvss = new CVSS_3(av, ac, pr, ui, s, c, i, a, e, rl, rc, cr, ir, ar, mav, mac, mpr, mui, ms, mc, mi, ma);
+			}
+			else if (tmpCvssVersion.compare("3.1") == 0)
+			{
+				cvss = new CVSS_3_1(av, ac, pr, ui, s, c, i, a, e, rl, rc, cr, ir, ar, mav, mac, mpr, mui, ms, mc, mi, ma);
+			}
+
+			if (!cvss)
+			{
+				return EXIT_FAILURE;
+			}
+
 			if (!baseScore && !temporalScore && !environmentalScore)
 				baseScore = true;
 			
@@ -723,21 +749,21 @@ int main(int argc, char *argv[]){
 			{
 				if (temporalScore || environmentalScore)
 					cout << "Base: ";
-				cout << cvss.GetBaseScore() << endl;
+				cout << cvss->GetBaseScore() << endl;
 			}
 
 			if (temporalScore)
 			{
 				if (baseScore || environmentalScore)
 					cout << "Temporal: ";
-				cout << cvss.GetTemporalScore() << endl;
+				cout << cvss->GetTemporalScore() << endl;
 			}
 
 			if (environmentalScore)
 			{
 				if (baseScore || temporalScore)
 					cout << "Environmental: ";
-				cout << cvss.GetEnvironmentalScore() << endl;
+				cout << cvss->GetEnvironmentalScore() << endl;
 			}
 
 			return EXIT_SUCCESS;

@@ -20,6 +20,8 @@ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef HAVE_CVSS_3_1_H_
 #define HAVE_CVSS_3_1_H_
 
+#include "cvss.h"
+
 #include <string>
 
 enum class AttackVector {
@@ -91,7 +93,7 @@ template<typename T> struct Modified {
 	bool modified;
 };
 
-class CVSS_3_1
+class CVSS_3_1 : public CVSS
 {
 	private:
 
@@ -127,6 +129,7 @@ class CVSS_3_1
 		Modified<Impact> _mi; //Modified Integrity
 		Modified<Impact> _ma; //Modified Availability
 
+	protected:
 	//helpers
 		float GetImpact(Impact impact);
 		float ScoreNormalize(float score);

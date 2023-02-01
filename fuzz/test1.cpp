@@ -17,20 +17,12 @@ along with this program; if not, write to the Free Software Foundation,
 Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef HAVE_CVSS_H_
-#define HAVE_CVSS_H_
-
 #include <string>
+extern int Parse(std::string const& data, bool baseScore, bool temporalScore, bool environmentalScore);
 
-class CVSS
+// the one function you need to provide
+extern "C" int LLVMFuzzerTestOneInput(const unsigned char *data, unsigned long size)
 {
-	public:
-
-		virtual float GetBaseScore(bool modified = false, bool round = true) {return 0;}; //Base Score
-		virtual float GetTemporalScore(bool round = true) {return 0;}; //Temporal Score
-		virtual float GetEnvironmentalScore(bool round = true) {return 0;}; //Environmental Score
-};
-
-int Parse(std::string const& data, bool baseScore = false, bool temporalScore = false, bool environmentalScore = false);
-
-#endif
+	std::string s((const char*)data, size);
+	return Parse(s, true, true, true);
+}

@@ -28,4 +28,5 @@ class CVSS_3 : public CVSS_3_1
 		CVSS_3(AttackVector av, AttackComplexity ac, PrivilegesRequired pr, UserInteraction ui, Scope s, Impact c, Impact i, Impact a, ExploitCodeMaturity e = ExploitCodeMaturity::NotDefined, RemediationLevel rl = RemediationLevel::NotDefined, ReportConfidence rc = ReportConfidence::NotDefined, Requirement cr = Requirement::NotDefined, Requirement ir = Requirement::NotDefined, Requirement ar = Requirement::NotDefined, Modified<AttackVector> mav = {AttackVector::Network, false}, Modified<AttackComplexity> mac = {AttackComplexity::Low, false}, Modified<PrivilegesRequired> mpr = {PrivilegesRequired::Low, false}, Modified<UserInteraction> mui = {UserInteraction::None, false}, Modified<Scope> ms = {Scope::Unchanged, false}, Modified<Impact> mc = {Impact::High, false}, Modified<Impact> mi = {Impact::High, false}, Modified<Impact> ma = {Impact::High, false});
 		float GetImpact(bool modified = false); //Environmental Score
 };
+
 #endif

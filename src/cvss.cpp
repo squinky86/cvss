@@ -712,7 +712,7 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 		}
 	}
 
-	CVSS *cvss;
+	CVSS *cvss = nullptr;
 	if (tmpCvssVersion.compare("3.0") == 0)
 	{
 		cvss = new CVSS_3(av, ac, pr, ui, s, c, i, a, e, rl, rc, cr, ir, ar, mav, mac, mpr, mui, ms, mc, mi, ma);

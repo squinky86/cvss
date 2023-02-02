@@ -25,7 +25,7 @@ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class CVSS
 {
 	public:
-
+		virtual ~CVSS() { };
 		virtual float GetBaseScore(bool modified = false, bool round = true) {return 0;}; //Base Score
 		virtual float GetTemporalScore(bool round = true) {return 0;}; //Temporal Score
 		virtual float GetEnvironmentalScore(bool round = true) {return 0;}; //Environmental Score

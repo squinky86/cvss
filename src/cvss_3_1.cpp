@@ -144,8 +144,11 @@ float CVSS_3_1::GetRequirement(Requirement r)
 		return 1.5;
 	case (Requirement::Low):
 		return 0.5;
+	case (Requirement::Medium):
+	case (Requirement::NotDefined):
+		return 1.0;
 	}
-	return 1.0;
+	return 1.0; //should never get here; treat impossible values as not defined
 }
 
 float CVSS_3_1::GetConfidentialityRequirement()
@@ -173,6 +176,9 @@ float CVSS_3_1::GetExploitCodeMaturity()
 		return 0.94;
 	case (ExploitCodeMaturity::Functional):
 		return 0.97;
+	case (ExploitCodeMaturity::High):
+	case (ExploitCodeMaturity::NotDefined):
+		return 1.0;
 	}
 	return 1.0;
 }
@@ -187,6 +193,9 @@ float CVSS_3_1::GetRemediationLevel()
 		return 0.96;
 	case (RemediationLevel::Workaround):
 		return 0.97;
+	case (RemediationLevel::Unavailable):
+	case (RemediationLevel::NotDefined):
+		return 1.0;
 	}
 	return 1.0;
 }
@@ -199,6 +208,9 @@ float CVSS_3_1::GetReportConfidence()
 		return 0.92;
 	case (ReportConfidence::Reasonable):
 		return 0.96;
+	case (ReportConfidence::Confirmed):
+	case (ReportConfidence::NotDefined):
+		return 1.0;
 	}
 	return 1.0;
 }

@@ -31,6 +31,6 @@ class CVSS
 		virtual float GetEnvironmentalScore(bool round = true) {return 0;}; //Environmental Score
 };
 
-int Parse(std::string const& data, bool baseScore = false, bool temporalScore = false, bool environmentalScore = false);
+int Parse(std::string const& data, bool baseScore = false, bool temporalScore = false, bool environmentalScore = false, bool suppressErrors = false);
 
 #endif

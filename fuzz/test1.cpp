@@ -18,11 +18,11 @@ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include <string>
-extern int Parse(std::string const& data, bool baseScore, bool temporalScore, bool environmentalScore);
+extern int Parse(std::string const& data, bool baseScore, bool temporalScore, bool environmentalScore, bool suppressErrors);
 
 // the one function you need to provide
 extern "C" int LLVMFuzzerTestOneInput(const unsigned char *data, unsigned long size)
 {
 	std::string s((const char*)data, size);
-	return Parse(s, true, true, true);
+	return Parse(s, true, true, true, true);
 }

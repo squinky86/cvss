@@ -40,7 +40,7 @@ string GetValue(string component)
 	return "";
 }
 
-int Parse(string const& toParse, bool baseScore, bool temporalScore, bool environmentalScore)
+int Parse(string const& toParse, bool baseScore, bool temporalScore, bool environmentalScore, bool suppressErrors)
 {
 	//CVSS 3.1
 	AttackVector av = AttackVector::Network;
@@ -91,7 +91,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unsupported CVSS version " << cvssVersion << endl;
+				if (!suppressErrors)
+					cerr << "Unsupported CVSS version " << cvssVersion << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -115,7 +116,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Attack Vector: " << attackVector << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Attack Vector: " << attackVector << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -134,7 +136,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Attack Complexity: " << attackComplexity << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Attack Complexity: " << attackComplexity << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -158,7 +161,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Privileges Required: " << privilegesRequired << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Privileges Required: " << privilegesRequired << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -177,7 +181,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown User Interaction: " << userInteraction << endl;
+				if (!suppressErrors)
+					cerr << "Unknown User Interaction: " << userInteraction << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -196,7 +201,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Scope: " << scope << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Scope: " << scope << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -220,7 +226,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Confidentiality: " << confidentiality << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Confidentiality: " << confidentiality << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -244,7 +251,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Integrity: " << integrity << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Integrity: " << integrity << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -268,7 +276,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Availability: " << availability << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Availability: " << availability << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -302,7 +311,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Exploit Code Maturity: " << exploitMaturity << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Exploit Code Maturity: " << exploitMaturity << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -336,7 +346,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Remediation Level: " << remediationLevel << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Remediation Level: " << remediationLevel << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -365,7 +376,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Report Confidence: " << reportConfidence << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Report Confidence: " << reportConfidence << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -394,7 +406,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Confidentiality Requirement: " << confidentialityRequirement << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Confidentiality Requirement: " << confidentialityRequirement << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -423,7 +436,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Integrity Requirement: " << integrityRequirement << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Integrity Requirement: " << integrityRequirement << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -452,7 +466,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Availability Requirement: " << availabilityRequirement << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Availability Requirement: " << availabilityRequirement << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -482,7 +497,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Modified Attack Vector: " << attackVector << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Modified Attack Vector: " << attackVector << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -507,7 +523,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Modified Attack Complexity: " << attackComplexity << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Modified Attack Complexity: " << attackComplexity << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -537,7 +554,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Modified Privileges Required: " << privilegesRequired << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Modified Privileges Required: " << privilegesRequired << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -562,7 +580,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Modified User Interaction: " << userInteraction << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Modified User Interaction: " << userInteraction << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -587,7 +606,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Modified Scope: " << scope << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Modified Scope: " << scope << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -617,7 +637,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Modified Confidentiality: " << confidentiality << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Modified Confidentiality: " << confidentiality << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -647,7 +668,8 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Modified Integrity: " << integrity << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Modified Integrity: " << integrity << endl;
 				return EXIT_FAILURE;
 			}
 		}
@@ -677,14 +699,16 @@ int Parse(string const& toParse, bool baseScore, bool temporalScore, bool enviro
 			}
 			else
 			{
-				cerr << "Unknown Availability: " << availability << endl;
+				if (!suppressErrors)
+					cerr << "Unknown Availability: " << availability << endl;
 				return EXIT_FAILURE;
 			}
 		}
 		else
 		{
-			cerr << "Unknown component: " << j << endl;
-			//return EXIT_FAILURE;
+			if (!suppressErrors)
+				cerr << "Unknown component: " << j << endl;
+			return EXIT_FAILURE;
 		}
 	}
 
